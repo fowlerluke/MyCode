@@ -6,8 +6,8 @@
 
   tasks:
 
-    - name: Install steam locomotive on CentOS machines
-      ansible.builtin.package:
+    - name: Install httpd on CentOS machines
+      ansible.builtin.dnf:
         name: httpd
         state: present
       become: yes # run as sudo

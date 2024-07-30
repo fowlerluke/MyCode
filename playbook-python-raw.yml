@@ -1,0 +1,9 @@
+---
+- name: Install sl with yum
+  hosts: planetexpress
+  connection: ansible.builtin.ssh
+
+  tasks:
+    - name: "Bootstrap python install"
+      ansible.builtin.raw: "yum install -y python3-pip"
+      become: yes
