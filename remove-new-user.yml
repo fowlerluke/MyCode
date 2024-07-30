@@ -8,9 +8,9 @@
   # Remove the user 'exampleuser'
   - name: remove a user
     ansible.builtin.user:
-     name: exampleuser
-     state: absent
-     remove: yes
+      name: exampleuser
+      state: absent
+      remove: yes
     become: yes
 
   # Remove the group 'sandbox'
