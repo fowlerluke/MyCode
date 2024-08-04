@@ -1,0 +1,33 @@
+---
+- name: Play Name
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  become: yes
+
+  # The "csvfile" lookup plugin is for making "selective" choices from CSV data.
+  # If you want to convert entire CSV files to lists of dicts, use the ansible module,
+  #   community.general.read_csv
+
+  tasks:
+    - name: Read CSV file
+      community.general.read_csv:
+        path: ~/mycode/files/ip_data.csv
+        key: server
+      register: server
+      delegate_to: localhost
+
+    - ansible.builtin.debug:
+        msg: 'list  {{ server.dict|dict2items }}'
+
+    - name: Display the Key value pairs
+      ansible.builtin.debug: 
+        msg: '{{ server.dict|dict2items }}'  
+      register: ServerName
+        
+    - name: loop over server names
+      loop: '{{ server|dict2items }}'
+      ansible.builtin.debug:
+        msg: '{{ server }}'
+
